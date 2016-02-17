@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RssListTableViewController.h
 //  RssReader
 //
 //  Created by Andrey Bondarenko on 15.02.16.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AHNNetworkService.h"
 
-@interface ViewController : UIViewController
+@interface AHNRssListTableViewController : UITableViewController <AHNNetworkServiceDelegate>
 
 
 @end
-

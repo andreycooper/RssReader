@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E37A04A1C73AF4200557495 /* AHNCoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37A0491C73AF4200557495 /* AHNCoreDataService.m */; };
+		1E37A0501C73B64200557495 /* AHNWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37A04F1C73B64200557495 /* AHNWebViewController.m */; };
+		1E3D71961C7304D40058CEA9 /* AHNRssTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3D71951C7304D40058CEA9 /* AHNRssTableViewCell.m */; };
 		1E4E42301C71F66F00A6E486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E422F1C71F66F00A6E486 /* main.m */; };
 		1E4E42331C71F66F00A6E486 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E42321C71F66F00A6E486 /* AppDelegate.m */; };
-		1E4E42361C71F66F00A6E486 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E42351C71F66F00A6E486 /* ViewController.m */; };
 		1E4E42391C71F66F00A6E486 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E4E42371C71F66F00A6E486 /* Main.storyboard */; };
 		1E4E423C1C71F66F00A6E486 /* RssReader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E423A1C71F66F00A6E486 /* RssReader.xcdatamodeld */; };
 		1E4E423E1C71F66F00A6E486 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E4E423D1C71F66F00A6E486 /* Assets.xcassets */; };
 		1E4E42411C71F66F00A6E486 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E4E423F1C71F66F00A6E486 /* LaunchScreen.storyboard */; };
 		1E4E424C1C71F66F00A6E486 /* RssReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E424B1C71F66F00A6E486 /* RssReaderTests.m */; };
 		1E4E42571C71F66F00A6E486 /* RssReaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E42561C71F66F00A6E486 /* RssReaderUITests.m */; };
+		1E4E426A1C71FCC700A6E486 /* AHNRssListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E42691C71FCC700A6E486 /* AHNRssListTableViewController.m */; };
+		1E4E426E1C72097200A6E486 /* AHNNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E426D1C72097200A6E486 /* AHNNetworkService.m */; };
+		1E4E42721C7220CA00A6E486 /* AHNRssEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E42711C7220CA00A6E486 /* AHNRssEntity.m */; };
+		1EC111361C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC111331C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.m */; };
+		1EC111371C727214000522F1 /* AHNManagedRssEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC111351C727214000522F1 /* AHNManagedRssEntity.m */; };
+		3B9F485F20B98A0E6C3D55C5 /* libPods-RssReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 025CD93C6B483F94BF63FC85 /* libPods-RssReader.a */; };
+		AF401B3F2BA96FB7F4255CEA /* AHNRssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AF401A574F7B4637D804CC74 /* AHNRssParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +45,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		025CD93C6B483F94BF63FC85 /* libPods-RssReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RssReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E37A0481C73AF4200557495 /* AHNCoreDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNCoreDataService.h; sourceTree = "<group>"; };
+		1E37A0491C73AF4200557495 /* AHNCoreDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNCoreDataService.m; sourceTree = "<group>"; };
+		1E37A04E1C73B64200557495 /* AHNWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNWebViewController.h; sourceTree = "<group>"; };
+		1E37A04F1C73B64200557495 /* AHNWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNWebViewController.m; sourceTree = "<group>"; };
+		1E3D71941C7304D40058CEA9 /* AHNRssTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNRssTableViewCell.h; sourceTree = "<group>"; };
+		1E3D71951C7304D40058CEA9 /* AHNRssTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNRssTableViewCell.m; sourceTree = "<group>"; };
 		1E4E422B1C71F66F00A6E486 /* RssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4E422F1C71F66F00A6E486 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E4E42311C71F66F00A6E486 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1E4E42321C71F66F00A6E486 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1E4E42341C71F66F00A6E486 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1E4E42351C71F66F00A6E486 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1E4E42381C71F66F00A6E486 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1E4E423B1C71F66F00A6E486 /* RssReader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RssReader.xcdatamodel; sourceTree = "<group>"; };
 		1E4E423D1C71F66F00A6E486 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +67,20 @@
 		1E4E42521C71F66F00A6E486 /* RssReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RssReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4E42561C71F66F00A6E486 /* RssReaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RssReaderUITests.m; sourceTree = "<group>"; };
 		1E4E42581C71F66F00A6E486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E4E42681C71FCC700A6E486 /* AHNRssListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNRssListTableViewController.h; sourceTree = "<group>"; };
+		1E4E42691C71FCC700A6E486 /* AHNRssListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNRssListTableViewController.m; sourceTree = "<group>"; };
+		1E4E426C1C72097200A6E486 /* AHNNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNNetworkService.h; sourceTree = "<group>"; };
+		1E4E426D1C72097200A6E486 /* AHNNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNNetworkService.m; sourceTree = "<group>"; };
+		1E4E42701C7220CA00A6E486 /* AHNRssEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNRssEntity.h; sourceTree = "<group>"; };
+		1E4E42711C7220CA00A6E486 /* AHNRssEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNRssEntity.m; sourceTree = "<group>"; };
+		1EC111321C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AHNManagedRssEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		1EC111331C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AHNManagedRssEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		1EC111341C727214000522F1 /* AHNManagedRssEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNManagedRssEntity.h; sourceTree = "<group>"; };
+		1EC111351C727214000522F1 /* AHNManagedRssEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNManagedRssEntity.m; sourceTree = "<group>"; };
+		AF401A574F7B4637D804CC74 /* AHNRssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHNRssParser.m; sourceTree = "<group>"; };
+		AF401CD1124D9020EFD1B4E3 /* AHNRssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHNRssParser.h; sourceTree = "<group>"; };
+		C1474F9A4EBF1505F84B66FF /* Pods-RssReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RssReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-RssReader/Pods-RssReader.release.xcconfig"; sourceTree = "<group>"; };
+		F76E6C490AE744FD081D0EA0 /* Pods-RssReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RssReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RssReader/Pods-RssReader.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B9F485F20B98A0E6C3D55C5 /* libPods-RssReader.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +109,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E01D26B1C72717000BFC389 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1E3D71931C7304280058CEA9 /* EntitiesCategories */,
+				1EC111341C727214000522F1 /* AHNManagedRssEntity.h */,
+				1EC111351C727214000522F1 /* AHNManagedRssEntity.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		1E3D71931C7304280058CEA9 /* EntitiesCategories */ = {
+			isa = PBXGroup;
+			children = (
+				1EC111321C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.h */,
+				1EC111331C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.m */,
+			);
+			name = EntitiesCategories;
+			sourceTree = "<group>";
+		};
 		1E4E42221C71F66F00A6E486 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +135,8 @@
 				1E4E424A1C71F66F00A6E486 /* RssReaderTests */,
 				1E4E42551C71F66F00A6E486 /* RssReaderUITests */,
 				1E4E422C1C71F66F00A6E486 /* Products */,
+				802B0778A4143899E55A8FB6 /* Pods */,
+				61F6223AFBD289E89D308C3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,15 +153,16 @@
 		1E4E422D1C71F66F00A6E486 /* RssReader */ = {
 			isa = PBXGroup;
 			children = (
-				1E4E42311C71F66F00A6E486 /* AppDelegate.h */,
-				1E4E42321C71F66F00A6E486 /* AppDelegate.m */,
-				1E4E42341C71F66F00A6E486 /* ViewController.h */,
-				1E4E42351C71F66F00A6E486 /* ViewController.m */,
-				1E4E42371C71F66F00A6E486 /* Main.storyboard */,
-				1E4E423D1C71F66F00A6E486 /* Assets.xcassets */,
+				1E01D26B1C72717000BFC389 /* CoreData */,
+				1E4E42641C71F67900A6E486 /* Application */,
+				1E4E426B1C72095B00A6E486 /* Services */,
+				1E4E426F1C721DEA00A6E486 /* Models */,
+				1E4E42651C71F68F00A6E486 /* ViewControllers */,
+				1E4E42671C71F71300A6E486 /* Views */,
 				1E4E423F1C71F66F00A6E486 /* LaunchScreen.storyboard */,
-				1E4E42421C71F66F00A6E486 /* Info.plist */,
+				1E4E42371C71F66F00A6E486 /* Main.storyboard */,
 				1E4E423A1C71F66F00A6E486 /* RssReader.xcdatamodeld */,
+				1E4E42661C71F6CA00A6E486 /* Resouces */,
 				1E4E422E1C71F66F00A6E486 /* Supporting Files */,
 			);
 			path = RssReader;
@@ -120,6 +171,7 @@
 		1E4E422E1C71F66F00A6E486 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E4E42421C71F66F00A6E486 /* Info.plist */,
 				1E4E422F1C71F66F00A6E486 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -143,6 +195,82 @@
 			path = RssReaderUITests;
 			sourceTree = "<group>";
 		};
+		1E4E42641C71F67900A6E486 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1E4E42311C71F66F00A6E486 /* AppDelegate.h */,
+				1E4E42321C71F66F00A6E486 /* AppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		1E4E42651C71F68F00A6E486 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E4E42681C71FCC700A6E486 /* AHNRssListTableViewController.h */,
+				1E4E42691C71FCC700A6E486 /* AHNRssListTableViewController.m */,
+				1E37A04E1C73B64200557495 /* AHNWebViewController.h */,
+				1E37A04F1C73B64200557495 /* AHNWebViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1E4E42661C71F6CA00A6E486 /* Resouces */ = {
+			isa = PBXGroup;
+			children = (
+				1E4E423D1C71F66F00A6E486 /* Assets.xcassets */,
+			);
+			name = Resouces;
+			sourceTree = "<group>";
+		};
+		1E4E42671C71F71300A6E486 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E3D71941C7304D40058CEA9 /* AHNRssTableViewCell.h */,
+				1E3D71951C7304D40058CEA9 /* AHNRssTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1E4E426B1C72095B00A6E486 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1E37A0481C73AF4200557495 /* AHNCoreDataService.h */,
+				1E37A0491C73AF4200557495 /* AHNCoreDataService.m */,
+				1E4E426C1C72097200A6E486 /* AHNNetworkService.h */,
+				1E4E426D1C72097200A6E486 /* AHNNetworkService.m */,
+				AF401CD1124D9020EFD1B4E3 /* AHNRssParser.h */,
+				AF401A574F7B4637D804CC74 /* AHNRssParser.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		1E4E426F1C721DEA00A6E486 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1E4E42701C7220CA00A6E486 /* AHNRssEntity.h */,
+				1E4E42711C7220CA00A6E486 /* AHNRssEntity.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		61F6223AFBD289E89D308C3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				025CD93C6B483F94BF63FC85 /* libPods-RssReader.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		802B0778A4143899E55A8FB6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F76E6C490AE744FD081D0EA0 /* Pods-RssReader.debug.xcconfig */,
+				C1474F9A4EBF1505F84B66FF /* Pods-RssReader.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +278,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E4E425B1C71F66F00A6E486 /* Build configuration list for PBXNativeTarget "RssReader" */;
 			buildPhases = (
+				0F634112E011BFDB19EEAEA9 /* Check Pods Manifest.lock */,
 				1E4E42271C71F66F00A6E486 /* Sources */,
 				1E4E42281C71F66F00A6E486 /* Frameworks */,
 				1E4E42291C71F66F00A6E486 /* Resources */,
+				2651B1131E235E4AA1F00BCB /* Embed Pods Frameworks */,
+				FC97F2D1F9A6728FBBFE6911 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +336,7 @@
 		1E4E42231C71F66F00A6E486 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AHN;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Rus Wizards Group";
 				TargetAttributes = {
@@ -271,15 +403,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0F634112E011BFDB19EEAEA9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2651B1131E235E4AA1F00BCB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RssReader/Pods-RssReader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC97F2D1F9A6728FBBFE6911 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RssReader/Pods-RssReader-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1E4E42271C71F66F00A6E486 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E4E42361C71F66F00A6E486 /* ViewController.m in Sources */,
+				1E3D71961C7304D40058CEA9 /* AHNRssTableViewCell.m in Sources */,
+				1E4E42721C7220CA00A6E486 /* AHNRssEntity.m in Sources */,
 				1E4E423C1C71F66F00A6E486 /* RssReader.xcdatamodeld in Sources */,
+				1E4E426A1C71FCC700A6E486 /* AHNRssListTableViewController.m in Sources */,
 				1E4E42331C71F66F00A6E486 /* AppDelegate.m in Sources */,
+				1E37A0501C73B64200557495 /* AHNWebViewController.m in Sources */,
+				1E37A04A1C73AF4200557495 /* AHNCoreDataService.m in Sources */,
+				1E4E426E1C72097200A6E486 /* AHNNetworkService.m in Sources */,
+				1EC111361C727214000522F1 /* AHNManagedRssEntity+CoreDataProperties.m in Sources */,
+				1EC111371C727214000522F1 /* AHNManagedRssEntity.m in Sources */,
 				1E4E42301C71F66F00A6E486 /* main.m in Sources */,
+				AF401B3F2BA96FB7F4255CEA /* AHNRssParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +604,7 @@
 		};
 		1E4E425C1C71F66F00A6E486 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F76E6C490AE744FD081D0EA0 /* Pods-RssReader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RssReader/Info.plist;
@@ -427,6 +616,7 @@
 		};
 		1E4E425D1C71F66F00A6E486 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1474F9A4EBF1505F84B66FF /* Pods-RssReader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RssReader/Info.plist;
@@ -503,6 +693,7 @@
 				1E4E425D1C71F66F00A6E486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E4E425E1C71F66F00A6E486 /* Build configuration list for PBXNativeTarget "RssReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +702,7 @@
 				1E4E42601C71F66F00A6E486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E4E42611C71F66F00A6E486 /* Build configuration list for PBXNativeTarget "RssReaderUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +711,7 @@
 				1E4E42631C71F66F00A6E486 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
