@@ -10,14 +10,12 @@
 #import "AHNRssListTableViewController.h"
 #import "AHNWebViewController.h"
 #import "AHNRssTableViewCell.h"
-#import "AHNRssEntity.h"
 #import "AHNCoreDataService.h"
 #import "AHNManagedRssEntity.h"
 
 
 @interface AHNRssListTableViewController () <NSFetchedResultsControllerDelegate>
 
-@property(strong, nonatomic) NSArray<AHNRssEntity *> *dataSource;
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 - (IBAction)refreshRss:(UIRefreshControl *)sender;
@@ -33,14 +31,13 @@
 
     [self initializeFetchedResultsController];
 
-    self.tableView.estimatedRowHeight = 300;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self setupTableView];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.fetchedResultsController.sections) {
+    if (self.fetchedResultsController.fetchedObjects.count > 0) {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     } else {
         [self setupEmptyView];
@@ -70,7 +67,7 @@
 
 #pragma mark - NetworkServiceDelegate
 
-- (void)networkService:(AHNNetworkService *)service didFetchingRss:(NSArray<AHNRssEntity *> *)rssEntityArray {
+- (void)networkService:(AHNNetworkService *)service didFetchingRss:(BOOL)isFetchCompleted {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if (self.refreshControl) {
         [self updateLastUpdateMessage];
@@ -127,6 +124,11 @@
 }
 
 #pragma mark - private methods
+
+- (void)setupTableView {
+    self.tableView.estimatedRowHeight = 300;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
 
 - (void)initializeFetchedResultsController {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([AHNManagedRssEntity class])];

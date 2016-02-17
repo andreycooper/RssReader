@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GDataXMLNode.h"
 
 @interface AHNRssEntity : NSObject
 

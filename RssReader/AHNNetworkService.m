@@ -8,8 +8,6 @@
 
 #import "AHNNetworkService.h"
 #import "AHNRssParser.h"
-#import "AHNRssEntity.h"
-#import "AppDelegate.h"
 #import "AHNCoreDataService.h"
 
 @implementation AHNNetworkService
@@ -42,10 +40,9 @@
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     AHNRssParser *parser = [[AHNRssParser alloc] init];
-    NSArray <AHNRssEntity *> *rssEntityArray = [parser parseNewsFromData:data];
     [parser parseNewsFromData:data toManagedContext:[[AHNCoreDataService sharedInstance] managedPrivateObjectContext]];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.delegate networkService:self didFetchingRss:rssEntityArray];
+        [self.delegate networkService:self didFetchingRss:YES];
     });
 }
 

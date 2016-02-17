@@ -68,7 +68,6 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="FAd-4C-6yD" id="inb-O1-cUV"/>
                             <outlet property="delegate" destination="FAd-4C-6yD" id="qmM-Ah-x4W"/>
                         </connections>
                     </tableView>

@@ -5,7 +5,6 @@
 
 #import "AHNRssParser.h"
 #import "GDataXMLNode.h"
-#import "AHNRssEntity.h"
 #import "AHNManagedRssEntity.h"
 #import "AHNCoreDataService.h"
 
@@ -17,14 +16,6 @@ NSString *const AHNDescriptionXMLKey = @"description";
 NSString *const AHNPubDateXMLKey = @"pubDate";
 
 @implementation AHNRssParser
-
-- (NSArray<AHNRssEntity *> *)parseNewsFromData:(NSData *)rssData {
-    NSMutableArray<AHNRssEntity *> *rssEntities = [[NSMutableArray alloc] init];
-    for (NSDictionary *rssDictionary in [self parseRssFromData:rssData]) {
-        [rssEntities addObject:[AHNRssEntity rssEntityFrom:rssDictionary]];
-    }
-    return [rssEntities copy];
-}
 
 - (void)parseNewsFromData:(NSData *)rssData toManagedContext:(NSManagedObjectContext *)context {
     NSArray<NSDictionary *> *rssDictionaryArray = [self parseRssFromData:rssData];

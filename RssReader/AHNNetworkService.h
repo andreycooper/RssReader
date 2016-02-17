@@ -13,7 +13,7 @@
 
 @protocol AHNNetworkServiceDelegate <NSObject>
 
-- (void)networkService:(AHNNetworkService *)service didFetchingRss:(NSArray<AHNRssEntity *> *)rssEntityArray;
+- (void)networkService:(AHNNetworkService *)service didFetchingRss:(BOOL)isFetchCompleted;
 
 @end
 

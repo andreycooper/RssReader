@@ -6,18 +6,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString * const AHNItemXMLKey;
-extern NSString * const AHNTitleXMLKey;
-extern NSString * const AHNLinkXMLKey;
-extern NSString * const AHNDescriptionXMLKey;
-extern NSString * const AHNPubDateXMLKey;
+extern NSString *const AHNItemXMLKey;
+extern NSString *const AHNTitleXMLKey;
+extern NSString *const AHNLinkXMLKey;
+extern NSString *const AHNDescriptionXMLKey;
+extern NSString *const AHNPubDateXMLKey;
 
 @class AHNRssEntity;
 
 
 @interface AHNRssParser : NSObject
-
-- (NSArray<AHNRssEntity *> *)parseNewsFromData:(NSData *)rssData;
 
 - (void)parseNewsFromData:(NSData *)rssData toManagedContext:(NSManagedObjectContext *)context;
 
