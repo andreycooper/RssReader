@@ -9,8 +9,8 @@
 #import "AHNCoreDataService.h"
 #import "AHNManagedRssEntity.h"
 
-NSString *const DataServiceDidSaveNotification = @"DataServiceDidSaveNotification";
-NSString *const DataServiceDidSaveFailedNotification = @"DataServiceDidSaveFailedNotification";
+NSString *const AHNDataServiceDidSaveNotification = @"AHNDataServiceDidSaveNotification";
+NSString *const AHNDataServiceDidSaveFailedNotification = @"AHNDataServiceDidSaveFailedNotification";
 
 @implementation AHNCoreDataService
 
@@ -23,6 +23,33 @@ NSString *const DataServiceDidSaveFailedNotification = @"DataServiceDidSaveFaile
     });
 
     return sharedInstance;
+}
+
+#pragma mark - Helpers methods
+
+- (NSFetchRequest *)fetchRequestForAllRSSEntitiesWithSortDescriptors:(NSArray <NSSortDescriptor *> *)sortDescriptors {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([AHNManagedRssEntity class])];
+    request.sortDescriptors = sortDescriptors;
+
+    return request;
+}
+
+
+- (void)deleteAllRSSEntities {
+    // Create batch request for deleting all rss entities
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([AHNManagedRssEntity class])];
+    NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+
+    NSManagedObjectContext *privateContext = [self managedPrivateObjectContext];
+
+    // Execute batch request for deleting entities
+    NSError *deleteError = nil;
+    [self.persistentStoreCoordinator executeRequest:deleteRequest withContext:privateContext error:&deleteError];
+
+    if (deleteError) {
+        NSLog(@"Unresolved error while deleting RSS entities: %@, \n%@", deleteError, [deleteError userInfo]);
+        abort();
+    }
 }
 
 #pragma mark - Core Data stack
@@ -44,6 +71,7 @@ NSString *const DataServiceDidSaveFailedNotification = @"DataServiceDidSaveFaile
 
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"RssReader" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
     return _managedObjectModel;
 }
 
@@ -88,12 +116,14 @@ NSString *const DataServiceDidSaveFailedNotification = @"DataServiceDidSaveFaile
     }
     _mainManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_mainManagedObjectContext setPersistentStoreCoordinator:coordinator];
+
     return _mainManagedObjectContext;
 }
 
 - (NSManagedObjectContext *)managedPrivateObjectContext {
     NSManagedObjectContext *privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [privateContext setParentContext:[self mainManagedObjectContext]];
+
     return privateContext;
 }
 
@@ -104,29 +134,18 @@ NSString *const DataServiceDidSaveFailedNotification = @"DataServiceDidSaveFaile
         NSError *error;
         if (context.hasChanges && ![context save:&error]) {
             NSLog(@"Unresolved error %@, \n%@", error, [error userInfo]);
-            [[NSNotificationCenter defaultCenter] postNotificationName:DataServiceDidSaveFailedNotification object:error];
+            // notify about failure of saving
+            [[NSNotificationCenter defaultCenter] postNotificationName:AHNDataServiceDidSaveFailedNotification object:error];
             abort();
         }
     }];
+    
     if (context.parentContext) {
         [self saveContext:context.parentContext];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:DataServiceDidSaveNotification object:nil];
+    // notify about successful saving
+    [[NSNotificationCenter defaultCenter] postNotificationName:AHNDataServiceDidSaveNotification object:nil];
 }
-
-- (void)deleteAllRSSEntities {
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([AHNManagedRssEntity class])];
-    NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
-
-    NSError *deleteError = nil;
-    NSManagedObjectContext *privateContext = [self managedPrivateObjectContext];
-    [self.persistentStoreCoordinator executeRequest:deleteRequest withContext:privateContext error:&deleteError];
-    if (deleteError) {
-        NSLog(@"Unresolved error while deleting RSS entities: %@, \n%@", deleteError, [deleteError userInfo]);
-        abort();
-    }
-}
-
 
 - (void)saveMainContext {
     NSManagedObjectContext *managedObjectContext = self.mainManagedObjectContext;
@@ -134,10 +153,11 @@ NSString *const DataServiceDidSaveFailedNotification = @"DataServiceDidSaveFaile
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             NSLog(@"Unresolved error %@, \n%@", error, [error userInfo]);
-            [[NSNotificationCenter defaultCenter] postNotificationName:DataServiceDidSaveFailedNotification object:error];
+            [[NSNotificationCenter defaultCenter] postNotificationName:AHNDataServiceDidSaveFailedNotification object:error];
         }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:DataServiceDidSaveNotification object:nil];
+    // notify about successful saving
+    [[NSNotificationCenter defaultCenter] postNotificationName:AHNDataServiceDidSaveNotification object:nil];
 }
 
 @end

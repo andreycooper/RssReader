@@ -17,10 +17,15 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
 
 @implementation AHNRssParser
 
+#pragma mark - Public methods
+
 - (void)parseNewsFromData:(NSData *)rssData toManagedContext:(NSManagedObjectContext *)context {
     NSArray<NSDictionary *> *rssDictionaryArray = [self parseRssFromData:rssData];
+    
     if (rssDictionaryArray.count > 0) {
+        // Delete all previous parsed entities from CoreData
         [[AHNCoreDataService sharedInstance] deleteAllRSSEntities];
+        
         for (NSDictionary *rssDictionary in rssDictionaryArray) {
             AHNManagedRssEntity *managedRssEntity = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([AHNManagedRssEntity class])
                                                                                   inManagedObjectContext:context];
@@ -29,12 +34,23 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
             }
         }
     }
+    
     if (context.hasChanges) {
         [[AHNCoreDataService sharedInstance] saveContext:context];
     }
 }
 
+#pragma mark - Private methods
+
+/**
+ *  Parses data using GdataXML lib
+ *
+ *  @param rssData Downloaded data
+ *
+ *  @return Array of dictionary that represents rss item
+ */
 - (NSArray<NSDictionary *> *)parseRssFromData:(NSData *)rssData {
+    // parse data using GdataXML lib into GDataXML document
     NSError *parsingDataError;
     GDataXMLDocument *xmlDocument = [[GDataXMLDocument alloc] initWithData:rssData encoding:NSUTF8StringEncoding error:&parsingDataError];
     if (parsingDataError) {
@@ -46,6 +62,7 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
 
     NSMutableArray<NSDictionary *> *rssDictionariesArray = [[NSMutableArray alloc] init];
 
+    // create array of GDataXML elements for nodes "item"
     NSError *parsingItemsError;
     NSArray *rssItems = [xmlDocument nodesForXPath:@"//item" error:&parsingItemsError];
     if (parsingItemsError) {
@@ -53,6 +70,7 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
         return nil;
     }
 
+    // parse each elemnent into dictionary and add to array
     for (GDataXMLElement *element in rssItems) {
         NSDictionary *rssDictionary = [self parseXMLItem:element];
         [rssDictionariesArray addObject:rssDictionary];
@@ -61,7 +79,13 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
     return [rssDictionariesArray copy];
 }
 
-
+/**
+ *  Parses one GDataXML element into dictionary
+ *
+ *  @param dataXMLElement
+ *
+ *  @return Dictionary represents rss item
+ */
 - (NSDictionary *)parseXMLItem:(GDataXMLElement *)dataXMLElement {
     NSMutableDictionary *rssDictionary = [[NSMutableDictionary alloc] init];
 
@@ -73,6 +97,13 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
     return [rssDictionary copy];
 }
 
+/**
+ *  Add NSString object to dictionary from GDataXML element for specified key
+ *
+ *  @param dataXMLElement
+ *  @param rssDictionary
+ *  @param key            could be "title", "description" or "link" for rss dicitionary
+ */
 - (void)addStringFromXMLElement:(GDataXMLElement *)dataXMLElement toDictionary:(NSMutableDictionary *)rssDictionary forKey:(NSString *)key {
     NSArray *elementArray = [dataXMLElement elementsForName:key];
     if (elementArray.count > 0) {
@@ -81,6 +112,13 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
     }
 }
 
+/**
+ *  Add NSDate object to dictionary from GDataXML element for specified key
+ *
+ *  @param dataXMLElement
+ *  @param rssDictionary
+ *  @param key            must be "pubDate" for rss dictionary
+ */
 - (void)addDateFromXMLElement:(GDataXMLElement *)dataXMLElement toDictionary:(NSMutableDictionary *)rssDictionary forKey:(NSString *)key {
     NSArray *elementArray = [dataXMLElement elementsForName:key];
     if (elementArray.count > 0) {
@@ -89,6 +127,13 @@ NSString *const AHNPubDateXMLKey = @"pubDate";
     }
 }
 
+/**
+ *  Helper method which parses NSString into NSDate
+ *
+ *  @param dateString
+ *
+ *  @return NSDate 
+ */
 - (NSDate *)parsePacificDateFromString:(NSString *)dateString {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"EEE, dd MMM yyyy HH:mm:ss zzz";

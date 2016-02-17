@@ -18,11 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Setup back button
-    self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
-            initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-
-    // setup webView
+    // Setup webView
     self.webView.delegate = self;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]];
     [self.webView loadRequest:request];

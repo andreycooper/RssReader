@@ -37,22 +37,26 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // if fetched managed RSS entitie count equals 0 then show view with hint
     if (self.fetchedResultsController.fetchedObjects.count > 0) {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     } else {
         [self setupEmptyView];
     }
+    
     return self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // get section from fetchedResultsController and return number of managed RSS entities
     id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
     return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AHNRssTableViewCell *rssTableViewCell = (AHNRssTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"AHNRssTableViewCell" forIndexPath:indexPath];
+    AHNRssTableViewCell *rssTableViewCell = (AHNRssTableViewCell *) [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AHNRssTableViewCell class]) forIndexPath:indexPath];
     [self setupCell:rssTableViewCell atIndexPath:indexPath];
+    
     return rssTableViewCell;
 }
 
@@ -62,15 +66,16 @@
     AHNWebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebView"];
     AHNManagedRssEntity *managedRssEntity = [self.fetchedResultsController objectAtIndexPath:indexPath];
     webViewController.urlString = managedRssEntity.link;
+    
     [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 #pragma mark - NetworkServiceDelegate
 
 - (void)networkService:(AHNNetworkService *)service didFetchingRss:(BOOL)isFetchCompleted {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    // stops refreshControl
     if (self.refreshControl) {
-        [self updateLastUpdateMessage];
+        [self updateLastUpdateMessageInRefreshControl];
         [self.refreshControl endRefreshing];
     }
 }
@@ -107,34 +112,48 @@
             [self setupCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [[self tableView] endUpdates];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Actions
 
+/**
+ *  Action for refreshControl
+ *
+ *  @param sender UIRefreshControl
+ */
 - (IBAction)refreshRss:(UIRefreshControl *)sender {
     [self refreshRssFromNetwork];
 }
 
-#pragma mark - private methods
+#pragma mark - Private methods
 
+/**
+ *  Setups tableView for automatic row heigth
+ */
 - (void)setupTableView {
     self.tableView.estimatedRowHeight = 300;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
+/**
+ *  Initializes fetchResultController and setup request for all managed RSS enetities
+ */
 - (void)initializeFetchedResultsController {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([AHNManagedRssEntity class])];
+    // Get fetchRequest from CoreData service with date sorting
     NSSortDescriptor *dateSort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
-    [request setSortDescriptors:@[dateSort]];
+    NSFetchRequest *request = [[AHNCoreDataService sharedInstance] fetchRequestForAllRSSEntitiesWithSortDescriptors:@[dateSort]];
+
     NSManagedObjectContext *mainManagedObjectContext = [[AHNCoreDataService sharedInstance] mainManagedObjectContext];
+
+    // initialize fitch controller
     [self setFetchedResultsController:[[NSFetchedResultsController alloc]
             initWithFetchRequest:request
             managedObjectContext:mainManagedObjectContext
@@ -142,6 +161,7 @@
                        cacheName:nil]];
     [[self fetchedResultsController] setDelegate:self];
 
+    // fetch managed rss entities
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
@@ -149,34 +169,56 @@
     }
 }
 
+/**
+ *  Fetchs RSS news from network using AHNNetworkService
+ */
 - (void)refreshRssFromNetwork {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AHNNetworkService *networkService = [[AHNNetworkService alloc] init];
     [networkService fetchRSSNewsWithDelegate:self];
 }
 
+/**
+ *  Fills TableView cell with content from managed rss entity. This methods also calls in FetchedResultsControllerDelegate
+ *
+ *  @param cell      custom TableView cell (AHNRssTableViewCell)
+ *  @param indexPath needs for taking managed rss entity from fetchedResultsController
+ */
 - (void)setupCell:(AHNRssTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     AHNManagedRssEntity *managedRssEntity = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell setupWithManagedRssEntity:managedRssEntity];
 }
 
+/**
+ *  Setups an view with a hint when the table is empty
+ */
 - (void)setupEmptyView {
-    // Display a message when the table is empty
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    UILabel *messageLabel = [self labelWithHintForEmptyView];
+
+    self.tableView.backgroundView = messageLabel;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+/**
+ *  Creates UILabel with hint for empty view
+ *
+ *  @return UILabel
+ */
+- (UILabel *)labelWithHintForEmptyView {
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 
     messageLabel.text = @"No data is currently available. Please pull down to refresh.";
     messageLabel.textColor = [UIColor blackColor];
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     [messageLabel sizeToFit];
-
-    self.tableView.backgroundView = messageLabel;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    return messageLabel;
 }
 
-- (void)updateLastUpdateMessage {
+- (void)updateLastUpdateMessageInRefreshControl {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
+
     NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
     NSDictionary *attrsDictionary = @{NSForegroundColorAttributeName : [UIColor blackColor]};
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];

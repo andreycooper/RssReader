@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @class AHNNetworkService;
-@class AHNRssEntity;
 
 @protocol AHNNetworkServiceDelegate <NSObject>
 
@@ -21,8 +20,16 @@
 
 @property(weak, nonatomic) id <AHNNetworkServiceDelegate> delegate;
 
+/**
+ *  Method creates NSURLSessionDataTask and starts it for fetching rss from Apple site
+ */
 - (void)fetchRssNews;
 
+/**
+ *  Method sets delegate to network service and calls fetchRssNews
+ *
+ *  @param delegate AHNNetworkServiceDelegate
+ */
 - (void)fetchRSSNewsWithDelegate:(id <AHNNetworkServiceDelegate>)delegate;
 
 @end

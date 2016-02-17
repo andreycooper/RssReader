@@ -7,7 +7,6 @@
 //
 
 #import "AHNRssTableViewCell.h"
-#import "AHNRssEntity.h"
 #import "AHNManagedRssEntity.h"
 
 @implementation AHNRssTableViewCell
@@ -20,12 +19,7 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)setupWithRssEntity:(AHNRssEntity *)rssEntity {
-    self.titleLabel.text = rssEntity.title;
-    self.contentTextView.text = rssEntity.content;
-    self.dateLabel.text = [self formatDate:rssEntity.date];
-    self.contentTextView.userInteractionEnabled = NO;
-}
+#pragma mark - Public methods
 
 - (void)setupWithManagedRssEntity:(AHNManagedRssEntity *)managedRssEntity {
     if (self) {
@@ -35,6 +29,8 @@
         self.contentTextView.userInteractionEnabled = NO;
     }
 }
+
+#pragma mark - Private methods
 
 - (NSString *)formatDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

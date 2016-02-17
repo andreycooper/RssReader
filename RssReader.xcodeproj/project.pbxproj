@@ -153,8 +153,8 @@
 		1E4E422D1C71F66F00A6E486 /* RssReader */ = {
 			isa = PBXGroup;
 			children = (
-				1E01D26B1C72717000BFC389 /* CoreData */,
 				1E4E42641C71F67900A6E486 /* Application */,
+				1E01D26B1C72717000BFC389 /* CoreData */,
 				1E4E426B1C72095B00A6E486 /* Services */,
 				1E4E426F1C721DEA00A6E486 /* Models */,
 				1E4E42651C71F68F00A6E486 /* ViewControllers */,

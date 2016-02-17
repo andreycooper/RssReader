@@ -12,11 +12,14 @@ extern NSString *const AHNLinkXMLKey;
 extern NSString *const AHNDescriptionXMLKey;
 extern NSString *const AHNPubDateXMLKey;
 
-@class AHNRssEntity;
-
-
 @interface AHNRssParser : NSObject
 
+/**
+ *  Parses rss news from dowloaded data and save its to managed object context, ussualy private. Also methods delete all previous parsed news
+ *
+ *  @param rssData Downloaded data
+ *  @param context Private managed object context
+ */
 - (void)parseNewsFromData:(NSData *)rssData toManagedContext:(NSManagedObjectContext *)context;
 
 @end

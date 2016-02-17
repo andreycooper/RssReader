@@ -13,6 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AHNManagedRssEntity : NSManagedObject
 
+/**
+ *  Helper's method which fills managed rss entity with content
+ *
+ *  @param rssDictionary must contains key: "title", "link", "description", "pubDate"
+ */
 - (void)fillManagedRssEntityFrom:(NSDictionary *)rssDictionary;
 
 @end

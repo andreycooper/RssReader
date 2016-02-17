@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  Unused model
+ */
 @interface AHNRssEntity : NSObject
 
 @property(strong, nonatomic) NSString *title;

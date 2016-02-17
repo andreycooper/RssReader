@@ -78,6 +78,9 @@
                             <action selector="refreshRss:" destination="FAd-4C-6yD" eventType="valueChanged" id="nsS-D7-flG"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <segue destination="kEX-mp-qxW" kind="showDetail" id="Bvm-Uo-n4v"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ada-4Z-saQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
