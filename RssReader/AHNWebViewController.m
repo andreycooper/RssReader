@@ -16,12 +16,18 @@
 
 @implementation AHNWebViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Setup webView
     self.webView.delegate = self;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]];
     [self.webView loadRequest:request];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark - UIWebViewDelegate
@@ -32,11 +38,11 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
-
 
 @end

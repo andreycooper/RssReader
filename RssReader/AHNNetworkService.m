@@ -14,7 +14,7 @@
 @implementation AHNNetworkService
 
 /**
- *  Initialiazes background NSURLSession as singleton
+ *  Instantiates background NSURLSession as singleton
  *
  *  @return Singleton instance of NSURLSession
  */

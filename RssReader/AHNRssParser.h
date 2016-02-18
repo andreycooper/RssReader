@@ -15,7 +15,7 @@ extern NSString *const AHNPubDateXMLKey;
 @interface AHNRssParser : NSObject
 
 /**
- *  Parses rss news from dowloaded data and save its to managed object context, ussualy private. Also methods delete all previous parsed news
+ *  Parses rss news from downloaded data and save its to managed object context, usually private. Also methods delete all previous parsed news
  *
  *  @param rssData Downloaded data
  *  @param context Private managed object context

@@ -71,7 +71,9 @@
                             <outlet property="delegate" destination="FAd-4C-6yD" id="qmM-Ah-x4W"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Apple Hot News" id="49o-PV-xLc"/>
+                    <navigationItem key="navigationItem" title="Apple Hot News" id="49o-PV-xLc">
+                        <barButtonItem key="backBarButtonItem" title=" " id="7gR-wz-AEb"/>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="l4g-1s-fYC">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -79,7 +81,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="kEX-mp-qxW" kind="showDetail" id="Bvm-Uo-n4v"/>
+                        <segue destination="kEX-mp-qxW" kind="show" identifier="WebViewSegue" id="yj4-0E-VVh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ada-4Z-saQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -106,6 +108,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2aZ-Wr-Awc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="webView" destination="svM-WS-h6J" id="wui-us-gou"/>

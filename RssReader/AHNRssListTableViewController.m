@@ -13,6 +13,7 @@
 #import "AHNCoreDataService.h"
 #import "AHNManagedRssEntity.h"
 
+static NSString *const AHNWebViewSegue = @"WebViewSegue";
 
 @interface AHNRssListTableViewController () <NSFetchedResultsControllerDelegate>
 
@@ -34,16 +35,28 @@
     [self setupTableView];
 }
 
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:AHNWebViewSegue]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        AHNWebViewController *webViewController = segue.destinationViewController;
+        AHNManagedRssEntity *rssEntity= [self.fetchedResultsController objectAtIndexPath:indexPath];
+        webViewController.urlString = rssEntity.link;
+    }
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // if fetched managed RSS entitie count equals 0 then show view with hint
+    // if fetched managed RSS entities count equals 0 then show view with hint
     if (self.fetchedResultsController.fetchedObjects.count > 0) {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     } else {
         [self setupEmptyView];
     }
-    
+
     return self.fetchedResultsController.sections.count;
 }
 
@@ -56,18 +69,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AHNRssTableViewCell *rssTableViewCell = (AHNRssTableViewCell *) [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AHNRssTableViewCell class]) forIndexPath:indexPath];
     [self setupCell:rssTableViewCell atIndexPath:indexPath];
-    
+
     return rssTableViewCell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AHNWebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebView"];
-    AHNManagedRssEntity *managedRssEntity = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    webViewController.urlString = managedRssEntity.link;
-    
-    [self.navigationController pushViewController:webViewController animated:YES];
+    [self performSegueWithIdentifier:AHNWebViewSegue sender:self];
 }
 
 #pragma mark - NetworkServiceDelegate
@@ -136,7 +145,7 @@
 #pragma mark - Private methods
 
 /**
- *  Setups tableView for automatic row heigth
+ *  Setups tableView for automatic row height
  */
 - (void)setupTableView {
     self.tableView.estimatedRowHeight = 300;
@@ -144,7 +153,7 @@
 }
 
 /**
- *  Initializes fetchResultController and setup request for all managed RSS enetities
+ *  Initializes fetchResultController and setup request for all managed RSS entities
  */
 - (void)initializeFetchedResultsController {
     // Get fetchRequest from CoreData service with date sorting
@@ -170,7 +179,7 @@
 }
 
 /**
- *  Fetchs RSS news from network using AHNNetworkService
+ *  Fetches RSS news from network using AHNNetworkService
  */
 - (void)refreshRssFromNetwork {
     AHNNetworkService *networkService = [[AHNNetworkService alloc] init];
@@ -211,7 +220,7 @@
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     [messageLabel sizeToFit];
-    
+
     return messageLabel;
 }
 

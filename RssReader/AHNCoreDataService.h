@@ -33,7 +33,7 @@ extern NSString *const AHNDataServiceDidSaveFailedNotification;
 /**
  *  Recurrently save managed object context
  *
- *  @param context NSManagedObject context, ussualy private
+ *  @param context NSManagedObject context, usually private
  */
 - (void)saveContext:(NSManagedObjectContext *)context;
 
